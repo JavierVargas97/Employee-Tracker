@@ -51,3 +51,18 @@ function start() {
                 console.log("default");
         }
     });
+}
+
+
+function view(){
+
+
+
+
+
+
+
+
+
+
+}
