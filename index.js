@@ -1,10 +1,11 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
 const { printTable } = require('console-table-printer');
+const { default: Choice } = require('inquirer/lib/objects/choice');
+const { default: Choices } = require('inquirer/lib/objects/choices');
 
-
-const db = mysql.createConnection(
-  {
+        //This is the information for sql database.
+const db = mysql.createConnection({
 
     host: 'localhost',
     port: 3306,
@@ -12,24 +13,41 @@ const db = mysql.createConnection(
     password: '',
     database: 'employees_db'
 
-  });
-
-db.connect(function (err){
+    });
+            //This connect sql to server and database
+db.connect(function(err){
     if (err) throw err;
-    firstPrompt ();
-});
+    console.log("SQL now is connected");
+    
+    //Start function
+    start();
+    });
+            
+        //Application questions 
+function start() {
+    inquirer
+    .prompt([{
+            type: "list",
+            name: "start",
+            message: "Please select the information of departments, employees and roles",
+            choices: ["View", "Add", "Update", "Exit"]
+        }
 
-// inquirer
-//   .prompt([
-//     /* Pass your questions in here */
-//   ])
-//   .then((answers) => {
-//     // Use user feedback for... whatever!!
-//   })
-//   .catch((error) => {
-//     if (error.isTtyError) {
-//       // Prompt couldn't be rendered in the current environment
-//     } else {
-//       // Something else went wrong
-//     }
-//   });
+    ]).then (function(res){
+        switch(res.start){
+            case "View":
+                view(); 
+                break;
+            case "Add":
+                add();
+                break;
+            case "Update":
+                updateEmloyee();
+                break;
+            case "Exit":
+                console.log("It's Done")
+                break;
+            default:
+                console.log("default");
+        }
+    });
