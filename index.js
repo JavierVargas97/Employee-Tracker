@@ -103,21 +103,109 @@ function role(){
                         console.table(results);
                         start();
                     }
-                    
                 )
             });
     });
 }
 
+    //  Function set
+function add(){
+    inquirer
+        .prompt ([
+            {
+            type: "list",
+            name: "add",
+            message: "What would you like to add?",
+            choices: ["Department", "Employee role", "Employee"]
+        }
+    ]).then (function (res) {
+        switch(res. add) {
+        case "Department":
+            addDepartment();
+        break;
+        case "Employee role":
+            addEmployeeRole();
+        break;
+        case "Employee":
+            addEmployee();
+            break;
+            default:
+        console.log ("default");
+        }
+    })
+}
 
 
+    // Info for Department
+function addDepartment(){
+    inquirer
+    .prompt([
+        {
+            name: "department",
+            type: "input",
+            message: "What would you like the department name to be?"
+        }
+    ]).then (function (answer) {
+        db.query(
+            "INSERT INTO department VALUES (DEFAULT, ?)",
+                [answer. department],
+                function (err) {
+                    if(err) throw err;
+        console.log ("Departments updated with "+ answer. department);
+        
+            start();
+            }
+        )
 
+        })
+}
 
-
-
-
-
-
+function addEmployeeRole(){
+    inquirer
+    .prompt([
+        {
+            name:"role",
+            type:"input",
+            message:"Enter role name"
+        },
+        {
+            name:"salary",
+            type:"number",
+            message:"Enter salary",
+            validate: function(value){
+                if(isNan(value) === false){
+                    return true;
+                }
+                return false;
+            }
+        },
+        {
+            name:"department_id",
+            type:"number",
+            message:"Enter department_id",
+            validate: function(value){
+                if(isNan(value) === false){
+                    return true;
+                }
+                return false;
+            }
+        }
+    ]).then (function (answer) {
+        db.query(
+            "INSERT INTO role SET ?)",
+            {
+                title: answer.role,
+                salary:answer.salary,
+                department_id: answer.department_id
+            },
+            function(err){
+                if(err) throw err;
+                console.log("Employee Roles is updated with + answer.role");
+            start();
+            }
+        )
+        })
+    }
 
 
 
