@@ -1,6 +1,5 @@
 const inquirer = require('inquirer');
 const mysql = require('mysql2');
-const { printTable } = require('console-table-printer');
 const cTable = require('console.table');
 
 //This is the information for sql database.
@@ -8,8 +7,8 @@ const dataBase = mysql.createConnection({
 
     host: 'Localhost',
     port: 3306,
-    user: 'sqluser',
-    password: 'password',
+    user: 'root',
+    password: 'Password',
     database: 'employee_db'
 
 });
@@ -21,37 +20,43 @@ dataBase.connect(function (err) {
     console.log("====================");
 
     //Start function
-    start();
+    Start();
 });
-
-//Application questions start
-const start = () => {
-    inquirer.
-        prompt([{
+const Start = () => {
+    inquirer.prompt([
+        {
             type: 'list',
-            name: 'MenuSelect',
+            name: 'mainMenu',
             message: 'Please select the option you want to use.',
-            choices:
-                ["View All Employees?",
-                    "View All Employee's By Roles?",
-                    "View all Emplyees By Deparments",
-                    "Exit"
-                ]
-        }
+            choices: ['View All Employees', 'View All Departments', 'View All Roles', 'Exit']
+        },
+    ])
 
-        ]).then(optionSelect => {
-            if (optionSelect.MenuSelect === 'View All Employees') {
-                OptionEmployees();
+        .then(answer => {
+            if (answer.mainMenu === 'View All Employees') {
+                viewAllEmployees();
             }
-            else if (optionSelect.MenuSelect === 'View All Employees by role') {
-                OptionRole();
-
-            } else if (optionSelect.MenuSelect === 'View All Employees by Departments') {
-                OptionDepartments();
-
-            } else if (optionSelect.MenuSelect === 'Exit') {
+            else if (answer.mainMenu === 'View All Departments') {
+                viewAllDepartments();
+            }
+            else if (answer.mainMenu === 'View All Roles') {
+                viewAllRoles();
+            }
+            else if (answer.mainMenu === 'Exit') {
                 dataBase.end();
             }
         })
 
+    function viewAllEmployees() {
+        console.log('=================');
+        console.log('This is the team!');
+        console.log('=================');
+        dataBase.query(`SELECT id, first_name, last_name, role_id FROM employee_db.employees;`,
+            function (err, res) {
+                if (err) throw err;
+                console.table(res);
+                Start();
+            });
+
+    }
 }

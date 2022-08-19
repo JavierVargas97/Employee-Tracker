@@ -1,4 +1,3 @@
-
 INSERT INTO department (name)
  VALUES ("Sales"), 
 		("Engineering"),
@@ -35,3 +34,4 @@ VALUES
 	  ("Robert", "De Niro", 7, NULL),
 	  ("Drake", "Paker", 8, 3);
     
+
