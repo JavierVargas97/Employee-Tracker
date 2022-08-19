@@ -45,7 +45,9 @@ Install my-project with npm
 
 ## Demo
 
-[Screen-Shot-2022-08-19-at-16-55-29.png](https://postimg.cc/PPHRBBRJ)
+_Image Prewiew_
+[![Screen-Shot-2022-08-19-at-16-55-29.png](https://i.postimg.cc/TY5vWxjV/Screen-Shot-2022-08-19-at-16-55-29.png)](https://postimg.cc/PPHRBBRJ)
+
 
 
 youtube.com
