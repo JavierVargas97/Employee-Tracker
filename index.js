@@ -57,6 +57,31 @@ const Start = () => {
                 console.table(res);
                 Start();
             });
-
     }
+}
+
+function viewAllDepartments() {
+    console.log('=================');
+    console.log('This are the departments!');
+    console.log('=================');
+    dataBase.query(`SELECT id, name FROM employee_db.department;`,
+        function (err, res) {
+            if (err) throw err;
+            console.table(res);
+            Start();
+        });
+}
+
+
+
+function viewAllRoles() {
+    console.log('=================');
+    console.log('This are the roles!');
+    console.log('=================');
+    dataBase.query(`SELECT id, title, salary  FROM employee_db.role;`,
+        function (err, res) {
+            if (err) throw err;
+            console.table(res);
+            Start();
+        });
 }
