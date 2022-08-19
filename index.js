@@ -32,17 +32,20 @@ const Start = () => {
         },
     ])
 
-        .then(answer => {
-            if (answer.mainMenu === 'View All Employees') {
+        .then(SelectMenu => {
+            if (SelectMenu.mainMenu === 'View All Employees') {
                 viewAllEmployees();
             }
-            else if (answer.mainMenu === 'View All Departments') {
+            else if (SelectMenu.mainMenu === 'View All Departments') {
                 viewAllDepartments();
             }
-            else if (answer.mainMenu === 'View All Roles') {
+            else if (SelectMenu.mainMenu === 'View All Roles') {
                 viewAllRoles();
             }
-            else if (answer.mainMenu === 'Exit') {
+            else if (SelectMenu.mainMenu === 'Exit') {
+                console.log('=========')
+                console.log('All set, thanks for using')
+                console.log('=========')
                 dataBase.end();
             }
         })
@@ -78,7 +81,13 @@ function viewAllRoles() {
     console.log('=================');
     console.log('This are the roles!');
     console.log('=================');
-    dataBase.query(`SELECT id, title, salary  FROM employee_db.role;`,
+    dataBase.query(`SELECT 
+    role.id AS ID,
+    role.title AS Title,
+    role.salary AS Salary,
+    department.name AS Department
+    FROM role
+    LEFT JOIN department ON role.department_id = department.id;`,
         function (err, res) {
             if (err) throw err;
             console.table(res);
