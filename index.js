@@ -21,7 +21,37 @@ dataBase.connect(function (err) {
     console.log("====================");
 
     //Start function
-    // start();
+    start();
 });
 
 //Application questions start
+const start = () => {
+    inquirer.
+        prompt([{
+            type: 'list',
+            name: 'MenuSelect',
+            message: 'Please select the option you want to use.',
+            choices:
+                ["View All Employees?",
+                    "View All Employee's By Roles?",
+                    "View all Emplyees By Deparments",
+                    "Exit"
+                ]
+        }
+
+        ]).then(optionSelect => {
+            if (optionSelect.MenuSelect === 'View All Employees') {
+                OptionEmployees();
+            }
+            else if (optionSelect.MenuSelect === 'View All Employees by role') {
+                OptionRole();
+
+            } else if (optionSelect.MenuSelect === 'View All Employees by Departments') {
+                OptionDepartments();
+
+            } else if (optionSelect.MenuSelect === 'Exit') {
+                dataBase.end();
+            }
+        })
+
+}
