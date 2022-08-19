@@ -3,14 +3,6 @@
     <a href="https://github.com/JavierVargas97/employee-tracker/contributors">
         <img alt="GitHub contributors" src="https://img.shields.io/github/contributors/JavierVargas97/employee-tracker?style=for-the-badge">
     <a>
-     <a href="https://github.com/JavierVargas97/employee-tracker/network/members">
-        <img alt="GitHub forks" src="https://img.shields.io/github/forks/JavierVargas97/TeamProfileGenerator?style=for-the-badge">
-    <a>
-     <a href="https://github.com/JavierVargas97/employee-tracker/stargazers">
-        <img alt="GitHub stars" src="https://img.shields.io/github/stars/JavierVargas97/TeamProfileGenerator?style=for-the-badge">
-    <a>
-     <a href="https://github.com/JavierVargas97/employee-tracker/issues">
-        <img alt="GitHub issues" src="https://img.shields.io/github/issues/JavierVargas97/TeamProfileGenerator?style=for-the-badge">
     <a>
      <a href="https://github.com/JavierVargas97/employee-tracker/LICENSE">
         <img alt="GitHub license" src="https://img.shields.io/github/license/JavierVargas97/TeamProfileGenerator?style=for-the-badge">
