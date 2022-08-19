@@ -47,7 +47,7 @@ const Start = () => {
             }
             else if (SelectMenu.mainMenu === 'Exit') {
                 console.log('=========')
-                console.log('All set, thanks for using')
+                console.log('All Done, thanks for using')
                 console.log('=========')
                 dataBase.end();
             }
