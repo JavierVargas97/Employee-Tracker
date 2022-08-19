@@ -28,7 +28,7 @@ const Start = () => {
             type: 'list',
             name: 'mainMenu',
             message: 'Please select the option you want to use.',
-            choices: ['View All Employees', 'View All Departments', 'View All Roles', 'Exit']
+            choices: ['View All Employees', 'View All Departments', 'View All Roles', 'View By Manager', 'Exit']
         },
     ])
 
@@ -42,6 +42,9 @@ const Start = () => {
             else if (SelectMenu.mainMenu === 'View All Roles') {
                 viewAllRoles();
             }
+            else if (SelectMenu.mainMenu === 'View By Manager') {
+                viewByManager();
+            }
             else if (SelectMenu.mainMenu === 'Exit') {
                 console.log('=========')
                 console.log('All set, thanks for using')
@@ -49,6 +52,8 @@ const Start = () => {
                 dataBase.end();
             }
         })
+
+
 
     function viewAllEmployees() {
         console.log('=================');
@@ -93,4 +98,21 @@ function viewAllRoles() {
             console.table(res);
             Start();
         });
+}
+
+function viewByManager() {
+    console.log('=================');
+    console.log('Employee By Manager!');
+    console.log('=================');
+    dataBase.query(`SELECT employees.id, employees.first_name, employees.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager
+    FROM employees
+    LEFT JOIN employees manager on manager.id = employees.manager_id
+    INNER JOIN role ON (role.id = employees.role_id)
+    INNER JOIN department ON (department.id = role.department_id)
+    ORDER BY employees.id;`,
+    function (err, res) {
+        if (err) throw err;
+        console.table(res);
+        Start();
+    });
 }
